@@ -7,6 +7,10 @@ class Category extends Model {
 	products() {
 		return this.hasMany('App/Models/Product')
 	}
+
+	group() {
+		return this.hasOne('App/Models/Group')
+	}
 }
 
 module.exports = Category

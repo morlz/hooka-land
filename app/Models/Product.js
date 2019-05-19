@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Product extends Model {
 	category() {
-		return this.hasOne('App/Models/Category')
+		return this.belongsTo('App/Models/Category')
 	}
 }
 

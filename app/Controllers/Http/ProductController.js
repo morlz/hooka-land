@@ -1,8 +1,55 @@
 const Product = use('App/Models/Product')
+const limit = 2
 
 class ProductController {
 	async index({ request, response }) {
-		const products = await Product.all()
+		const where = {}
+
+		if (request.qs.category)
+			where.category_id = +request.qs.category
+
+		const pCountQuery = Product
+			.query()
+			.where(where)
+
+		if (request.qs.group)
+			pCountQuery.whereHas('category', q => {
+				q.where({
+					group_id: +request.qs.group
+				})
+			})
+
+		const pCount = await pCountQuery.count()
+
+		const pageCount = Math.ceil(pCount[0]['count(*)'] / limit)
+
+		let currentPage = +request.qs.page || 1
+
+		if (currentPage > pageCount)
+			currentPage = pageCount
+
+		if (currentPage < 1)
+			currentPage = 1
+
+		const productsQuery = Product
+			.query()
+			.where(where)
+			.limit(limit)
+			.offset((currentPage - 1) * limit)
+
+		if (request.qs.group)
+			productsQuery.whereHas('category', q => {
+				q.where({
+					group_id: +request.qs.group
+				})
+			})
+
+		const products = await productsQuery.fetch()
+
+		response.header('Pagination-Count', pageCount)
+		response.header('Pagination-Page', currentPage)
+		response.header('Pagination-Limit', limit)
+		response.header('Access-Control-Expose-Headers', 'Pagination-Count, Pagination-Page, Pagination-Limit')
 
 		return response.json(products)
 	}
