@@ -1,5 +1,5 @@
 const Product = use('App/Models/Product')
-const limit = 2
+const limit = 20
 
 class ProductController {
 	async index({ request, response }) {
