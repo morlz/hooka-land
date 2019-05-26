@@ -33,9 +33,21 @@ class ProductController {
 
 		const productsQuery = Product
 			.query()
-			.where(where)
-			.limit(limit)
-			.offset((currentPage - 1) * limit)
+			
+			
+
+		if (request.qs.ids) {
+			if (!Array.isArray(request.qs.ids) || request.qs.ids.some(el => Number.isNaN(+el)))
+				return response.badRequest(`ids must me an array of numbers`)
+
+			productsQuery
+				.whereIn('id', request.qs.ids)
+		} else {
+			productsQuery
+				.limit(limit)
+				.offset((currentPage - 1) * limit)
+				.where(where)
+		}
 
 		if (request.qs.group)
 			productsQuery.whereHas('category', q => {
