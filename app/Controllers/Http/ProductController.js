@@ -2,7 +2,7 @@ const Product = use('App/Models/Product')
 const limit = 20
 
 class ProductController {
-	async index({ request, response }) {
+	async index ({ request, response }) {
 		const where = {}
 
 		if (request.qs.category)
@@ -33,8 +33,8 @@ class ProductController {
 
 		const productsQuery = Product
 			.query()
-			
-			
+
+
 
 		if (request.qs.ids) {
 			if (!Array.isArray(request.qs.ids) || request.qs.ids.some(el => Number.isNaN(+el)))
@@ -66,7 +66,7 @@ class ProductController {
 		return response.json(products)
 	}
 
-	async view({ request, response }) {
+	async view ({ request, response }) {
 		try {
 			const product = await Product.findOrFail(request.params.id)
 
@@ -86,7 +86,7 @@ class ProductController {
 		}
 	}
 
-	async create({ request, response }) {
+	async create ({ request, response }) {
 		const productInfo = request.only([
 			'name',
 			'description',
@@ -124,7 +124,7 @@ class ProductController {
 			.json(product)
 	}
 
-	async update({ request, response }) {
+	async update ({ request, response }) {
 		const productInfo = request.only([
 			'name',
 			'description',
@@ -175,7 +175,7 @@ class ProductController {
 			.json(product)
 	}
 
-	async remove({ request, response }) {
+	async remove ({ request, response }) {
 		try {
 			var product = await Product.find(request.params.id)
 		} catch (err) {

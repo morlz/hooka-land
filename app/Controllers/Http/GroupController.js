@@ -1,7 +1,7 @@
 const Group = use('App/Models/Group')
 
 class GroupController {
-	async index({ request, response }) {
+	async index ({ request, response }) {
 		const groups = await Group
 			.query()
 			.with('categories')
@@ -10,7 +10,7 @@ class GroupController {
 		return response.json(groups)
 	}
 
-	async create({ request, response }) {
+	async create ({ request, response }) {
 		const info = request.only([
 			'name',
 		])
@@ -39,7 +39,7 @@ class GroupController {
 			.json(group)
 	}
 
-	async update({ request, response }) {
+	async update ({ request, response }) {
 		const info = request.only([
 			'name',
 		])
@@ -83,7 +83,7 @@ class GroupController {
 			.json(group)
 	}
 
-	async remove({ request, response }) {
+	async remove ({ request, response }) {
 		try {
 			var group = await Group.find(request.params.id)
 		} catch (err) {

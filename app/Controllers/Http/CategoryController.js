@@ -1,13 +1,13 @@
 const Category = use('App/Models/Category')
 
 class CategoryController {
-	async index({ request, response }) {
+	async index ({ request, response }) {
 		const categorys = await Category.all()
 
 		return response.json(categorys)
 	}
 
-	async view({ request, response }) {
+	async view ({ request, response }) {
 		try {
 			const category = await Category
 				.query()
@@ -31,7 +31,7 @@ class CategoryController {
 		}
 	}
 
-	async create({ request, response }) {
+	async create ({ request, response }) {
 		const info = request.only([
 			'name',
 		])
@@ -60,7 +60,7 @@ class CategoryController {
 			.json(category)
 	}
 
-	async update({ request, response }) {
+	async update ({ request, response }) {
 		const info = request.only([
 			'name',
 		])
@@ -104,7 +104,7 @@ class CategoryController {
 			.json(category)
 	}
 
-	async remove({ request, response }) {
+	async remove ({ request, response }) {
 		try {
 			var category = await Category.find(request.params.id)
 		} catch (err) {
