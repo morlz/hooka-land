@@ -1,10 +1,18 @@
 const Hash = use('Hash')
+const User = use('App/Models/User')
 
 class UserController {
-	async login ({ auth, request }) {
+	async signIn ({ request, auth }) {
 		const { email, password } = request.all()
 
-		return await auth.attempt(email, password)
+		const token = await auth.attempt(email, password)
+
+		const user = await User.find(1)
+
+		return {
+			user,
+			token
+		}
 	}
 }
 

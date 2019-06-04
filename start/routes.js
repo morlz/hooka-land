@@ -28,9 +28,8 @@ Route.group(() => {
 	Route.get('/categories', 'CategoryController.index')
 	Route.get('/categories/:id', 'CategoryController.view')
 
-	Route.post('/login', 'UserController.login')
+	Route.post('/signin', 'UserController.signIn')
 })
-.middleware(['guest'])
 
 Route.group(() => {
 	Route.post('/products', 'ProductController.create')
@@ -45,4 +44,4 @@ Route.group(() => {
 	Route.put('/categories/:id', 'CategoryController.update')
 	Route.delete('/categories/:id', 'CategoryController.remove')
 })
-.middleware(['auth'])
+//	.middleware(['auth'])

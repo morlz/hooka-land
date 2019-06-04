@@ -11,6 +11,7 @@ class GroupController {
 	}
 
 	async create ({ request, response }) {
+		console.log('req')
 		const info = request.only([
 			'name',
 		])
