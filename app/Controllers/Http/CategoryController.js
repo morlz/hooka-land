@@ -34,6 +34,7 @@ class CategoryController {
 	async create ({ request, response }) {
 		const info = request.only([
 			'name',
+			'group_id'
 		])
 
 		if (info.name === '')
