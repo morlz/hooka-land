@@ -17,7 +17,7 @@ const mailTransport = nodemailer.createTransport({
 })
 
 const toUser = {
-	email: 'LaMuerte404@gmail.com',
+	email: 'mostmanchik@gmail.com',
 }
 
 const tpl = `
