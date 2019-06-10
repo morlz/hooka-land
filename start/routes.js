@@ -29,6 +29,8 @@ Route.group(() => {
 	Route.get('/categories/:id', 'CategoryController.view')
 
 	Route.post('/signin', 'UserController.signIn')
+
+	Route.post('/order/create', 'OrderController.create')
 })
 
 Route.group(() => {
